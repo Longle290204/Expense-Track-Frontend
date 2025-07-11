@@ -1,0 +1,146 @@
+.app-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các phần tử xuống dòng khi không đủ không gian */
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px; /* Khoảng cách giữa các phần */
+}
+
+.footer-section {
+  flex: 1; /* Cho phép các phần tử co giãn */
+  min-width: 250px; /* Chiều rộng tối thiểu trước khi xuống dòng */
+  margin-bottom: 20px;
+}
+
+.footer-section h3 {
+  color: #f8c000;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.footer-section p,
+.footer-section ul {
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #f8c000;
+}
+
+.footer-section.contact p i {
+  margin-right: 8px;
+  color: #f8c000;
+}
+
+.social-links {
+  margin-top: 15px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 1.5em;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #f8c000;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+  margin-top: 30px;
+  font-size: 0.85em;
+  color: #aaa;
+}
+
+/* -------------------- Responsive Adjustments -------------------- */
+
+/* Cho màn hình từ 768px trở xuống (ví dụ: tablet dọc, điện thoại ngang) */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* Chuyển các cột thành hàng dọc */
+    align-items: center; /* Căn giữa các phần */
+    gap: 20px; /* Giảm khoảng cách */
+  }
+
+  .footer-section {
+    min-width: unset; /* Bỏ giới hạn chiều rộng tối thiểu */
+    width: 90%; /* Chiếm phần lớn chiều rộng trên màn hình nhỏ */
+    text-align: center; /* Căn giữa nội dung trong mỗi phần */
+    margin-bottom: 10px; /* Giảm khoảng cách dưới */
+  }
+
+  .footer-section ul {
+    text-align: center; /* Căn giữa các item trong danh sách */
+    padding: 0;
+  }
+
+  .footer-section p,
+  .footer-section ul li {
+    font-size: 0.9em; /* Giảm kích thước chữ */
+  }
+
+  .social-links {
+    display: flex; /* Sử dụng flexbox cho icon mạng xã hội */
+    justify-content: center; /* Căn giữa các icon */
+    margin-top: 10px;
+  }
+}
+
+/* Cho màn hình từ 480px trở xuống (ví dụ: điện thoại di động) */
+@media (max-width: 480px) {
+  .app-footer {
+    padding: 30px 15px; /* Giảm padding tổng thể */
+  }
+
+  .footer-section h3 {
+    font-size: 1.1em; /* Giảm kích thước tiêu đề */
+    margin-bottom: 10px;
+  }
+
+  .footer-section p,
+  .footer-section ul li {
+    font-size: 0.85em; /* Giảm kích thước chữ nhỏ hơn nữa */
+  }
+
+  .social-links a {
+    font-size: 1.3em; /* Giảm kích thước icon mạng xã hội */
+    margin: 0 10px; /* Khoảng cách giữa các icon */
+  }
+
+  .footer-bottom {
+    padding-top: 15px;
+    margin-top: 20px;
+    font-size: 0.75em; /* Giảm kích thước chữ phần bản quyền */
+  }
+}
