@@ -1,0 +1,94 @@
+.input-form {
+  min-width: 94px;
+  max-width: 427.14px;
+  padding: 9px;
+  background-color: #fff;
+  color: #444;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  width: 96%;
+  margin-bottom: 20px;
+}
+
+.input-form-wrong {
+  border-color: #f33a58;
+}
+
+.input-form-hover:hover {
+  border-color: #44cf46;
+}
+
+.box-info > label {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.box-info > label > span {
+  color: red;
+  margin-left: 2px;
+}
+
+form {
+  width: 427.14px;
+}
+
+.form-signUp {
+  width: 40%;
+  margin-left: auto;
+}
+
+h4 {
+  font-size: 2.4rem;
+  font-weight: 400;
+  margin-bottom: 33px;
+  margin-left: 140px;
+}
+
+label {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.box-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-form {
+  color: #272727;
+  margin-top: 10px;
+}
+
+.form-button {
+  font-size: 1.5rem;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  outline: 0;
+  border: 0;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-weight: 400;
+  width: 250px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  &:hover {
+    background-color: rgb(60, 58, 58);
+    color: #e0e0e0;
+  }
+}
+
+.form-message {
+  font-size: 1.4rem;
+  color: #f33a58;
+  margin-top: -15px;
+}
