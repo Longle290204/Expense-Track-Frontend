@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 function RegisterForm() {
   const { formData, errors, handleInputChange, handleBlur, handleSubmit } = useRegisterForm()
 
-  const fields: (keyof RegisterFormData)[] = ['username', 'email', 'password', 'rePassword']
+  const fields: (keyof RegisterFormData)[] = ['username', 'email', 'password', 'confirmPassword']
   return (
     <form onSubmit={handleSubmit} noValidate className={cx('form-Register')}>
       <h4>ĐĂNG KÝ</h4>
@@ -22,7 +22,7 @@ function RegisterForm() {
                 ? 'Email'
                 : field === 'password'
                   ? 'Mật khẩu'
-                  : field === 'rePassword'
+                  : field === 'confirmPassword'
                     ? 'Nhắc lại mật khẩu'
                     : ''
           }
@@ -33,6 +33,17 @@ function RegisterForm() {
           onChange={handleInputChange}
           onBlur={handleBlur}
           error={errors[field]}
+          placeholder={
+            field === 'username'
+              ? 'Tên đăng nhập'
+              : field === 'email'
+                ? 'Email'
+                : field === 'password'
+                  ? 'Mật khẩu'
+                  : field === 'confirmPassword'
+                    ? 'Nhắc lại mật khẩu'
+                    : ''
+          }
         />
       ))}
       <button className={cx('form-button')} type='submit'>
