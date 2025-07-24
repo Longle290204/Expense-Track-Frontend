@@ -10,7 +10,7 @@ function LoginForm() {
 
   const fields: (keyof LoginFormData)[] = ['username', 'password']
   return (
-    <form onSubmit={handleLogin} className={cx('form-Login')}>
+    <form onSubmit={handleLogin} autoComplete='off' className={cx('form-Login')}>
       <h4>ĐĂNG NHẬP</h4>
 
       {loading && <span>Đang xử lý...</span>}
@@ -29,6 +29,7 @@ function LoginForm() {
           value={formData[field] || ''}
           onChange={handleInputChange}
           error={errors[field]}
+          placeholder={field === 'username' ? 'Tên đăng nhập' : field === 'password' ? 'Mật khẩu' : ''}
           required
         />
       ))}

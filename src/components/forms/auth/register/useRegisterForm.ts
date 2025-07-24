@@ -9,7 +9,7 @@ export function useRegisterForm() {
     username: '',
     email: '',
     password: '',
-    rePassword: ''
+    confirmPassword: ''
   })
 
   const [errors, setErrors] = useState<RegisterErrors>({})
@@ -42,7 +42,7 @@ export function useRegisterForm() {
     }
   }
 
-  type ValidationField = 'username' | 'email' | 'password' | 'rePassword'
+  type ValidationField = 'username' | 'email' | 'password' | 'confirmPassword'
   const validateField = async (
     field: ValidationField,
     value: string,
@@ -99,7 +99,13 @@ export function useRegisterForm() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/ExpenseManaApi/api/auth/register', formData)
+      console.log(formData)
+
+      const response = await axios.post('http://localhost:8080/ExpenseTrackApp/api/auth/register', formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       alert('Đăng ký thành công!')
       console.log(response.data)
     } catch (error) {

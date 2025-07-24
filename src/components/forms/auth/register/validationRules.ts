@@ -22,7 +22,7 @@ export const getValidationRules = (formData: RegisterFormData) => ({
       message: 'Mật khẩu phải có ít nhất 6 ký tự'
     }
   },
-  rePassword: {
+  confirmPassword: {
     required: 'Vui lòng nhập lại mật khẩu',
     custom: {
       isValid: (value: string) => value === formData.password,
