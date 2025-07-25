@@ -33,9 +33,9 @@ export function useLoginForm() {
       const decoded: any = jwtDecode(accessToken)
 
       if (decoded?.username === 'superadmin') {
-        window.location.href = '/admin'
+        navigate('/admin')
       } else {
-        window.location.href = '/'
+        navigate('/dashboard')
       }
     } catch (error) {
       setErrors({ errorMessage: 'Tên đăng nhập hoặc mật khẩu không đúng' })
