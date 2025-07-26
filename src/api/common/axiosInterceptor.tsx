@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/ExpenseTrackApp/api'
+  baseURL: 'http://localhost:8080/ExpenseTrackApp'
 })
 
 interface FailedQueuePromise {
@@ -20,6 +20,12 @@ const processQueue = (error: Error | null, token = null) => {
   failedQueue = []
 }
 
+const redirectLogin = () => {
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('refreshToken')
+  window.location.href = '/login'
+}
+
 // Gắn accessToken vào header của mỗi request
 api.interceptors.request.use(
   (config) => {
@@ -36,21 +42,11 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    /**
-     * Structur error:
-     * 
-     * error {
-     *  response: { status: 401, data: ... },
-        config: {
-          url: '/api/users',
-          method: 'GET',
-          headers: { Authorization: 'Bearer old_token' },
-          // ... tất cả thông tin của request gốc
-        }
-     * }
-     * 
-    */
     const originalRequest = error.config
+
+    if (!originalRequest) {
+      return Promise.reject(error)
+    }
 
     // Nếu access token hết hạn
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -69,31 +65,40 @@ api.interceptors.response.use(
 
       isRefreshing = true
 
-      const refreshToken = localStorage.getItem('refresh_token')
+      const refreshToken = localStorage.getItem('refreshToken')
+
       if (!refreshToken) {
-        // Token không tồn tại => có thể điều hướng login
+        redirectLogin()
         return Promise.reject(error)
       }
 
       try {
-        const res = await axios.post('http://localhost:8080/ExpenseTrackApp/refresh-token', {
+        const res = await api.post('/refresh-token', {
           refreshToken: refreshToken
         })
 
         const newAccessToken = res.data.accessToken
         localStorage.setItem('accessToken', newAccessToken)
+        // Có thể server trả về refreshToken mới
+        const newRefreshToken = res.data.refreshToken
+        if (newRefreshToken) {
+          localStorage.setItem('refreshToken', newRefreshToken)
+        }
 
         processQueue(null, newAccessToken)
 
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
         return api(originalRequest)
       } catch (err) {
+        console.error('Refresh token failed:', err)
         processQueue(err as Error, null)
-        // Có thể logout tại đây nếu muốn
+        redirectLogin()
         return Promise.reject(err)
       } finally {
         isRefreshing = false
       }
+    } else {
+      console.log('Not 401 or already retried') // 7. Check tại sao không vào
     }
 
     return Promise.reject(error)
