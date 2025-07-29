@@ -1,7 +1,5 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 // html, body {
@@ -36,7 +34,15 @@ button,
 input,
 [tabIndex] {
   outline: none;
-  // border: none;
+  border: none;
+}
+
+button:focus,
+input:focus,
+button:active,
+input:active {
+  outline: none !important;
+  box-shadow: none;
 }
 
 a[href] {
