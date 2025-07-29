@@ -1,30 +1,41 @@
-import axios from 'axios'
-
-const API_URL = 'http://localhost:8080/ExpenseTrackApp/api/group'
-
-const accessToken = localStorage.getItem('accessToken')
+import api from '../../api/common/axiosInterceptor'
 
 export const createGroup = async (groupName: String) => {
-  const response = await axios.post(
-    `${API_URL}/create`,
-    {
-      group_name: groupName
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }
-  )
+  const response = await api.post(`/api/group/create`, {
+    group_name: groupName
+  })
 
   return response.data
 }
 
 export const getGroupsUser = async () => {
-  const response = await axios.get(`${API_URL}/getAllGroupUserId`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
-  }) // ví dụ dùng GET để lấy toàn bộ
+  const response = await api.get(`/api/group/getAllGroupUserId`)
+  return response.data
+}
+
+export const addMemberToGroup = async () => {
+  const response = await api.post(`/api/user/addUserToGroup`)
+  return response.data
+}
+
+export const updateGroup = async (groupId: string, newGroupName: string) => {
+  const response = await api.post(`/api/group/${groupId}`, { group_name: newGroupName })
+  return response.data
+}
+
+export const getUserInGroup = async (groupId: string) => {
+  const response = await api.get(`api/user/getAllUserWithRolesAndPermission`, {
+    params: { group_id: groupId }
+  })
+  return response.data
+}
+
+export const addUserToGroup = async (userId: string, groupId: string) => {
+  const response = await api.post(`api/user/addUserToGroup`, { user_id: userId, group_id: groupId })
+  return response.data
+}
+
+export const addUserToGroup = async (userId: string, groupId: string) => {
+  const response = await api.post(`api/user/addUserToGroup`, { user_id: userId, group_id: groupId })
   return response.data
 }
